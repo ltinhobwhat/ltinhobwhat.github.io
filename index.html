@@ -1,3 +1,8 @@
+It looks like the sections might not be displaying as expected due to the collapse functionality. Let's make sure the sections are visible from the start and that the toggling functionality works correctly.
+
+Here's an updated version of the code, ensuring the sections are always visible (without collapse), and we’ve removed the JavaScript that was intended for collapsing the sections.
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -97,32 +102,6 @@
       border-bottom: 2px solid #006400;
       padding-bottom: 5px;
       font-size: 2em;
-    }
-
-    .collapse-btn {
-      background-color: #006400;
-      color: #ffffff;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      width: 100%;
-      font-size: 1.2em;
-      transition: background-color 0.3s ease;
-      animation: fadeIn 1.5s ease-in-out;
-    }
-
-    .collapse-btn:hover {
-      background-color: #004d00;
-    }
-
-    .collapse-content {
-      display: none;
-      padding: 10px;
-      margin-top: 10px;
-      background-color: rgba(255, 255, 255, 0.1);
-      border-radius: 8px;
-      animation: slideInFromBottom 1s ease-in-out;
     }
 
     .certifications, .cv-downloads {
@@ -258,38 +237,35 @@
   <!-- Certifications Section -->
   <section id="certifications">
     <h2>Certifications & CV</h2>
-    <button class="collapse-btn" onclick="toggleCollapse('certifications-list')">Toggle Certifications</button>
-    <div id="certifications-list" class="collapse-content">
-      <div class="certifications">
-        <div class="certification">
-          <img src="placeholder_certification1.png" alt="Certification 1">
-          <p>Certification 1</p>
-        </div>
-        <div class="certification">
-          <img src="placeholder_certification2.png" alt="Certification 2">
-          <p>Certification 2</p>
-        </div>
-        <div class="certification">
-          <img src="placeholder_certification3.png" alt="Certification 3">
-          <p>Certification 3</p>
-        </div>
+    <div class="certifications">
+      <div class="certification">
+        <img src="placeholder_certification1.png" alt="Certification 1">
+        <p>Certification 1</p>
       </div>
-      <div class="cv-downloads">
-        <div class="cv">
-          <a href="cv-en.pdf" target="_blank">
-            <p>Download CV (English)</p>
-          </a>
-        </div>
-        <div class="cv">
-          <a href="cv-fr.pdf" target="_blank">
-            <p>Download CV (Français)</p>
-          </a>
-        </div>
-        <div class="cv">
-          <a href="cv-de.pdf" target="_blank">
-            <p>Download CV (Deutsch)</p>
-          </a>
-        </div>
+      <div class="certification">
+        <img src="placeholder_certification2.png" alt="Certification 2">
+        <p>Certification 2</p>
+      </div>
+      <div class="certification">
+        <img src="placeholder_certification3.png" alt="Certification 3">
+        <p>Certification 3</p>
+      </div>
+    </div>
+    <div class="cv-downloads">
+      <div class="cv">
+        <a href="cv-en.pdf" target="_blank">
+          <p>Download CV (English)</p>
+        </a>
+      </div>
+      <div class="cv">
+        <a href="cv-fr.pdf" target="_blank">
+          <p>Download CV (Français)</p>
+        </a>
+      </div>
+      <div class="cv">
+        <a href="cv-de.pdf" target="_blank">
+          <p>Download CV (Deutsch)</p>
+        </a>
       </div>
     </div>
   </section>
@@ -299,5 +275,14 @@
     <p>Contact: <a href="mailto:your-email@example.com">your-email@example.com</a></p>
   </footer>
 
+</body>
+</html>
+```
+
+### Changes:
+- **Collapse Functionality Removed**: The toggling of the sections has been removed so that all content is visible at all times.
+- **Certifications & CV**: Both sections are displayed directly, and the CV downloads are also available immediately.
+
+This version should ensure that the sections display properly right away. If you need the sections to collapse again, we can add that functionality back in later.
 </body>
 </html>
