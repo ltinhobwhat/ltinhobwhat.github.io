@@ -1,7 +1,3 @@
-Here's the updated version with the language choice at the top, along with translations for English, French, German, and Luxembourgish. I'll also explain how to add your contact information and social links.
-
-### Updated HTML
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,22 +16,21 @@ Here's the updated version with the language choice at the top, along with trans
       background: #f4f4f4;
       color: #333;
       text-shadow: 0 0 3px rgba(255, 255, 255, 0.1), 0 0 5px rgba(255, 255, 255, 0.1);
-      animation: fadeIn 1s ease-in-out;
     }
 
     header {
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
       padding: 60px 20px;
-      background-color: #004d00; /* Darker, classy green */
+      background-color: #2a4d8f; /* Beautiful Blue */
       color: #ffffff;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-      animation: slideInFromTop 1s ease-in-out;
     }
 
     header .text {
-      max-width: 60%;
+      text-align: center;
+      max-width: 80%;
     }
 
     header .text h1 {
@@ -54,9 +49,9 @@ Here's the updated version with the language choice at the top, along with trans
     }
 
     header .image img {
-      max-width: 400px; /* Slightly bigger image */
-      height: 400px; /* Adjusting height for a square shape */
-      border-radius: 10%;
+      max-width: 300px;
+      height: 300px;
+      border-radius: 50%;
       border: 5px solid #ffffff;
     }
 
@@ -64,8 +59,6 @@ Here's the updated version with the language choice at the top, along with trans
       background-color: #333;
       padding: 15px 20px;
       text-align: center;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-      animation: slideInFromLeft 1s ease-in-out;
     }
 
     nav a {
@@ -80,7 +73,7 @@ Here's the updated version with the language choice at the top, along with trans
 
     nav a:hover {
       background-color: #555;
-      color: #004d00;
+      color: #2a4d8f;
     }
 
     section {
@@ -90,18 +83,17 @@ Here's the updated version with the language choice at the top, along with trans
       background-color: rgba(255, 255, 255, 0.1);
       border-radius: 10px;
       box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
-      animation: fadeIn 1s ease-in-out;
     }
 
     h2 {
-      color: #004d00;
-      border-bottom: 2px solid #004d00;
+      color: #2a4d8f;
+      border-bottom: 2px solid #2a4d8f;
       padding-bottom: 5px;
       font-size: 2em;
     }
 
     .collapse-btn {
-      background-color: #004d00;
+      background-color: #2a4d8f;
       color: #ffffff;
       padding: 10px 20px;
       border: none;
@@ -109,12 +101,10 @@ Here's the updated version with the language choice at the top, along with trans
       cursor: pointer;
       width: 100%;
       font-size: 1.2em;
-      transition: background-color 0.3s ease;
-      animation: fadeIn 1.5s ease-in-out;
     }
 
     .collapse-btn:hover {
-      background-color: #003d00;
+      background-color: #1c3e6f;
     }
 
     .collapse-content {
@@ -123,7 +113,6 @@ Here's the updated version with the language choice at the top, along with trans
       margin-top: 10px;
       background-color: rgba(255, 255, 255, 0.1);
       border-radius: 8px;
-      animation: slideInFromBottom 1s ease-in-out;
     }
 
     .certifications, .cv-downloads {
@@ -139,12 +128,6 @@ Here's the updated version with the language choice at the top, along with trans
       padding: 15px;
       border-radius: 10px;
       text-align: center;
-      transition: transform 0.3s ease;
-      animation: fadeIn 2s ease-in-out;
-    }
-
-    .certification:hover, .cv:hover {
-      transform: scale(1.05);
     }
 
     footer {
@@ -153,8 +136,6 @@ Here's the updated version with the language choice at the top, along with trans
       text-align: center;
       padding: 15px 20px;
       margin-top: 40px;
-      box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.3);
-      animation: fadeIn 2s ease-in-out;
     }
 
     footer a {
@@ -163,7 +144,7 @@ Here's the updated version with the language choice at the top, along with trans
     }
 
     footer a:hover {
-      color: #004d00;
+      color: #2a4d8f;
       text-decoration: underline;
     }
 
@@ -174,63 +155,19 @@ Here's the updated version with the language choice at the top, along with trans
     }
 
     .language-switcher button {
-      background-color: #004d00;
+      background-color: #2a4d8f;
       color: #ffffff;
       border: none;
       padding: 10px 20px;
       margin: 0 5px;
       cursor: pointer;
       border-radius: 5px;
-      transition: background-color 0.3s ease;
-      animation: fadeIn 2s ease-in-out;
     }
 
     .language-switcher button:hover {
-      background-color: #003d00;
+      background-color: #1c3e6f;
     }
 
-    /* Animations */
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-      }
-      to {
-        opacity: 1;
-      }
-    }
-
-    @keyframes slideInFromTop {
-      from {
-        transform: translateY(-100%);
-        opacity: 0;
-      }
-      to {
-        transform: translateY(0);
-        opacity: 1;
-      }
-    }
-
-    @keyframes slideInFromLeft {
-      from {
-        transform: translateX(-100%);
-        opacity: 0;
-      }
-      to {
-        transform: translateX(0);
-        opacity: 1;
-      }
-    }
-
-    @keyframes slideInFromBottom {
-      from {
-        transform: translateY(100%);
-        opacity: 0;
-      }
-      to {
-        transform: translateY(0);
-        opacity: 1;
-      }
-    }
   </style>
 </head>
 <body>
@@ -239,11 +176,9 @@ Here's the updated version with the language choice at the top, along with trans
   <div class="language-switcher">
     <button onclick="switchLanguage('en')">English</button>
     <button onclick="switchLanguage('fr')">Français</button>
-    <button onclick="switchLanguage('de')">Deutsch</button>
-    <button onclick="switchLanguage('lb')">Lëtzebuergesch</button>
   </div>
 
-  <!-- Header with image on the side -->
+  <!-- Header with image in the center -->
   <header>
     <div class="text">
       <h1 id="name">Laurent Carlizzi</h1>
@@ -315,4 +250,18 @@ Here's the updated version with the language choice at the top, along with trans
 <script>
   function toggleCollapse(sectionId) {
     var section = document.getElementById(sectionId);
-    if (section.style.display === "none" || section
+    if (section.style.display === "none" || section.style.display === "") {
+      section.style.display = "block";
+    } else {
+      section.style.display = "none";
+    }
+  }
+
+  function switchLanguage(language) {
+    alert('Language switched to ' + language);
+    // Here you can add functionality to switch the text of the page dynamically.
+  }
+</script>
+
+</body>
+</html>
