@@ -263,5 +263,24 @@
   }
 </script>
 
+<script>
+  const translations = {
+    en: {
+      name: "Laurent Carlizzi",
+      intro: "Driven by curiosity and a keen interest in evolving technologies, I bring a unique blend of analytical thinking and creative problem-solving to the table..."
+    },
+    fr: {
+      name: "Laurent Carlizzi",
+      intro: "Animé par la curiosité et un vif intérêt pour les technologies en constante évolution, j'apporte un mélange unique de pensée analytique et de résolution créative de problèmes..."
+    }
+  };
+
+  function switchLanguage(language) {
+    document.getElementById("name").textContent = translations[language].name;
+    document.getElementById("intro").textContent = translations[language].intro;
+  }
+</script>
+
+  
 </body>
 </html>
