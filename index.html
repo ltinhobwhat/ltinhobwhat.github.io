@@ -1,11 +1,6 @@
-I understand the changes you're aiming for, so let's make those adjustments:
+Here's the updated version with the language choice at the top, along with translations for English, French, German, and Luxembourgish. I'll also explain how to add your contact information and social links.
 
-1. **Language switching**: We'll keep the English and French visible all the time, and only update the text content based on the selected language.
-2. **CVs**: The CV download options will only be available in English and French, while the other languages will be hidden.
-3. **Visual changes**: We'll adjust the color scheme for more creativity and elegance, and center the image with a larger size to give you more presence.
-
-Here’s the updated code:
-
+### Updated HTML
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -30,23 +25,24 @@ Here’s the updated code:
 
     header {
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
       padding: 60px 20px;
-      background-color: #2c3e50; /* Elegant, dark blue-grey */
+      background-color: #004d00; /* Darker, classy green */
       color: #ffffff;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
       animation: slideInFromTop 1s ease-in-out;
-      flex-direction: column;
-      text-align: center;
+    }
+
+    header .text {
+      max-width: 60%;
     }
 
     header .text h1 {
-      font-size: 3.5em;
+      font-size: 3em;
       margin: 0;
       font-family: 'Open Sans', sans-serif;
       font-weight: 700;
-      letter-spacing: 2px;
     }
 
     header .text p {
@@ -58,16 +54,14 @@ Here’s the updated code:
     }
 
     header .image img {
-      max-width: 400px; /* Larger image */
-      height: auto;
-      border-radius: 50%;
+      max-width: 400px; /* Slightly bigger image */
+      height: 400px; /* Adjusting height for a square shape */
+      border-radius: 10%;
       border: 5px solid #ffffff;
-      margin-top: 20px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     }
 
     nav {
-      background-color: #34495e; /* Slightly darker shade */
+      background-color: #333;
       padding: 15px 20px;
       text-align: center;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
@@ -75,7 +69,7 @@ Here’s the updated code:
     }
 
     nav a {
-      color: #ecf0f1;
+      color: #e0e0e0;
       text-decoration: none;
       margin: 0 15px;
       font-size: 1.1em;
@@ -85,8 +79,8 @@ Here’s the updated code:
     }
 
     nav a:hover {
-      background-color: #16a085;
-      color: #2c3e50;
+      background-color: #555;
+      color: #004d00;
     }
 
     section {
@@ -100,14 +94,14 @@ Here’s the updated code:
     }
 
     h2 {
-      color: #2c3e50;
-      border-bottom: 2px solid #2c3e50;
+      color: #004d00;
+      border-bottom: 2px solid #004d00;
       padding-bottom: 5px;
       font-size: 2em;
     }
 
     .collapse-btn {
-      background-color: #2c3e50;
+      background-color: #004d00;
       color: #ffffff;
       padding: 10px 20px;
       border: none;
@@ -120,7 +114,7 @@ Here’s the updated code:
     }
 
     .collapse-btn:hover {
-      background-color: #1abc9c;
+      background-color: #003d00;
     }
 
     .collapse-content {
@@ -141,7 +135,7 @@ Here’s the updated code:
 
     .certification, .cv {
       flex: 1 1 calc(33.333% - 20px);
-      background: #34495e;
+      background: #333;
       padding: 15px;
       border-radius: 10px;
       text-align: center;
@@ -154,8 +148,8 @@ Here’s the updated code:
     }
 
     footer {
-      background-color: #34495e;
-      color: #ecf0f1;
+      background-color: #333;
+      color: #e0e0e0;
       text-align: center;
       padding: 15px 20px;
       margin-top: 40px;
@@ -164,12 +158,12 @@ Here’s the updated code:
     }
 
     footer a {
-      color: #ecf0f1;
+      color: #e0e0e0;
       text-decoration: none;
     }
 
     footer a:hover {
-      color: #2c3e50;
+      color: #004d00;
       text-decoration: underline;
     }
 
@@ -180,7 +174,7 @@ Here’s the updated code:
     }
 
     .language-switcher button {
-      background-color: #2c3e50;
+      background-color: #004d00;
       color: #ffffff;
       border: none;
       padding: 10px 20px;
@@ -192,7 +186,7 @@ Here’s the updated code:
     }
 
     .language-switcher button:hover {
-      background-color: #1abc9c;
+      background-color: #003d00;
     }
 
     /* Animations */
@@ -241,11 +235,19 @@ Here’s the updated code:
 </head>
 <body>
 
+  <!-- Language Switcher -->
+  <div class="language-switcher">
+    <button onclick="switchLanguage('en')">English</button>
+    <button onclick="switchLanguage('fr')">Français</button>
+    <button onclick="switchLanguage('de')">Deutsch</button>
+    <button onclick="switchLanguage('lb')">Lëtzebuergesch</button>
+  </div>
+
   <!-- Header with image on the side -->
   <header>
     <div class="text">
-      <h1>Laurent Carlizzi</h1>
-      <p id="bio-text">
+      <h1 id="name">Laurent Carlizzi</h1>
+      <p id="intro">
         Driven by curiosity and a keen interest in evolving technologies, I bring a unique blend of analytical thinking and creative problem-solving to the table. My journey has led me to explore the dynamic world of cybersecurity, where I am constantly challenged and inspired by the ever-changing landscape. With a background in communication, I excel at bridging technical concepts with real-world applications, helping others navigate the complexities of modern digital environments.
       </p>
     </div>
@@ -253,12 +255,6 @@ Here’s the updated code:
       <img src="laurent.jpg" alt="Laurent Carlizzi">
     </div>
   </header>
-
-  <!-- Navigation -->
-  <nav>
-    <a href="javascript:void(0)" onclick="switchLanguage('en')">English</a>
-    <a href="javascript:void(0)" onclick="switchLanguage('fr')">Français</a>
-  </nav>
 
   <!-- Certifications Section -->
   <section id="certifications">
@@ -307,6 +303,8 @@ Here’s the updated code:
     <h2>Contact Information</h2>
     <p>If you wish to get in touch, feel free to contact me at:</p>
     <p>Email: <a href="mailto:your-email@example.com">your-email@example.com</a></p>
+    <p>LinkedIn: <a href="https://www.linkedin.com" target="_blank">My LinkedIn</a></p>
+    <p>GitHub: <a href="https://github.com" target="_blank">My GitHub</a></p>
   </section>
 
   <!-- Footer -->
@@ -317,37 +315,4 @@ Here’s the updated code:
 <script>
   function toggleCollapse(sectionId) {
     var section = document.getElementById(sectionId);
-    if (section.style.display === "none" || section.style.display === "") {
-        section.style.display = "block";
-    } else {
-        section.style.display = "none";
-    }
-  }
-
-  function switchLanguage(language) {
-    var languages = {
-      "en": {
-        "bio-text": "Driven by curiosity and a keen interest in evolving technologies, I bring a unique blend of analytical thinking and creative problem-solving to the table. My journey has led me to explore the dynamic world of cybersecurity, where I am constantly challenged and inspired by the ever-changing landscape. With a background in communication, I excel at bridging technical concepts with real-world applications, helping others navigate the complexities of modern digital environments."
-      },
-      "fr": {
-        "bio-text": "Animé par la curiosité et un vif intérêt pour les technologies en évolution, j'apporte une combinaison unique de pensée analytique et de résolution créative de problèmes. Mon parcours m'a conduit à explorer le monde dynamique de la cybersécurité, où je suis constamment défié et inspiré par un paysage en perpétuelle évolution. Fort d'une expérience en communication, je suis capable de relier les concepts techniques aux applications réelles, aidant ainsi les autres à naviguer dans la complexité des environnements numériques modernes."
-      }
-    };
-    
-    document.getElementById("bio-text").textContent = languages[language]["bio-text"];
-  }
-</script>
-
-</body>
-</html>
-```
-
-### Key Changes:
-- **Language Switching**: The text content changes dynamically between English and French, while only those two CVs (English and French) are displayed.
-- **Image Size and Position**: The image has been resized and positioned centrally with a circular crop for better presence.
-- **Color Scheme**: The color palette has been updated to darker, more elegant tones with some modern touches like teal for hover effects.
-- **Fonts**: The typography has been enhanced to be more refined, with a
-
- mix of Google Fonts for readability.
-
-Let me know if you need further adjustments!
+    if (section.style.display === "none" || section
