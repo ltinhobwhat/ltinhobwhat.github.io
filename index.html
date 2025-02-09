@@ -322,6 +322,28 @@ Here’s the updated code:
     <p>Contact: <a href="mailto:your-email@example.com">your-email@example.com</a></p>
   </footer>
 
+<script>
+  function toggleCollapse(sectionId) {
+    var section = document.getElementById(sectionId);
+    if (section.style.display === "none" || section.style.display === "") {
+        section.style.display = "block";
+    } else {
+        section.style.display = "none";
+    }
+  }
+
+  function switchLanguage(language) {
+    var languages = ["en", "fr", "de", "lb"];
+    
+    languages.forEach(lang => {
+        var cvSection = document.getElementById("cv-" + lang);
+        if (cvSection) {
+            cvSection.style.display = (lang === language) ? "block" : "none";
+        }
+    });
+  }
+</script>
+
 </body>
 </html>
 ```
