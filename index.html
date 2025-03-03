@@ -3,36 +3,525 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Personal website of Laurent Carlizzi, specializing in cybersecurity and communication">
-  <title>Laurent Carlizzi | Cybersecurity Professional</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <title>Laurent Carlizzi</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link rel="stylesheet" href="styles.css">
-  <!-- Dark mode detection -->
-  <script>
-    // Check for saved theme preference or respect OS preference
-    const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
-    const storedTheme = localStorage.getItem("theme");
-    
-    if (storedTheme === "dark" || (!storedTheme && prefersDarkScheme.matches)) {
-      document.documentElement.classList.add("dark-mode");
+  <style>
+    :root {
+      --primary: #2d46b9;
+      --secondary: #00c2ff;
+      --dark: #1e1e2c;
+      --light: #f9f9f9;
+      --accent: #ff3e7f;
+      --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
     }
-  </script>
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--light);
+      color: #333;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    /* Language Switcher */
+    .language-switcher {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      z-index: 100;
+    }
+    
+    .language-btn {
+      background: none;
+      border: 2px solid white;
+      color: white;
+      padding: 8px 15px;
+      margin-left: 5px;
+      border-radius: 30px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .language-btn:hover, .language-btn.active {
+      background: white;
+      color: var(--primary);
+    }
+    
+    /* Header */
+    header {
+      background: var(--gradient);
+      color: white;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    header::before {
+      content: "";
+      position: absolute;
+      width: 150%;
+      height: 150%;
+      top: -25%;
+      left: -25%;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      opacity: 0.1;
+      animation: move 10s linear infinite;
+    }
+    
+    @keyframes move {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+    
+    .header-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .header-text {
+      flex: 0.6;
+      padding: 0 50px;
+      animation: fadeInUp 1s ease;
+    }
+    
+    .header-image {
+      flex: 0.4;
+      text-align: center;
+      animation: fadeInRight 1s ease;
+    }
+    
+    .header-image img {
+      width: 300px;
+      height: 300px;
+      border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+      border: 5px solid rgba(255, 255, 255, 0.3);
+      object-fit: cover;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+      transition: all 0.5s ease;
+    }
+    
+    .header-image img:hover {
+      transform: scale(1.05);
+      border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    }
+    
+    h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 3.5em;
+      margin-bottom: 20px;
+      letter-spacing: -1px;
+      position: relative;
+      display: inline-block;
+    }
+    
+    h1::after {
+      content: "";
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 80px;
+      height: 4px;
+      background: var(--accent);
+    }
+    
+    /* Navigation */
+    nav {
+      background: var(--dark);
+      padding: 20px 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .nav-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .nav-link {
+      color: var(--light);
+      text-decoration: none;
+      margin: 0 20px;
+      font-weight: 600;
+      font-family: 'Montserrat', sans-serif;
+      position: relative;
+      padding: 8px 0;
+      transition: all 0.3s ease;
+    }
+    
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: all 0.3s ease;
+      transform: translateX(-50%);
+    }
+    
+    .nav-link:hover {
+      color: var(--secondary);
+    }
+    
+    .nav-link:hover::after {
+      width: 100%;
+    }
+    
+    /* Sections */
+    section {
+      padding: 80px 0;
+      position: relative;
+    }
+    
+    section:nth-child(odd) {
+      background-color: #f2f2f2;
+    }
+    
+    .section-title {
+      text-align: center;
+      margin-bottom: 50px;
+      color: var(--dark);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.5em;
+      position: relative;
+      padding-bottom: 15px;
+    }
+    
+    .section-title::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: var(--accent);
+    }
+    
+    /* Certifications */
+    .certifications-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+    
+    .certification-card {
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .certification-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    }
+    
+    .certification-image {
+      height: 200px;
+      overflow: hidden;
+    }
+    
+    .certification-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    
+    .certification-card:hover .certification-image img {
+      transform: scale(1.1);
+    }
+    
+    .certification-content {
+      padding: 20px;
+      text-align: center;
+    }
+    
+    .certification-content h3 {
+      font-family: 'Montserrat', sans-serif;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+    
+    /* CV Downloads */
+    .cv-container {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+    }
+    
+    .cv-card {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      width: 250px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .cv-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    }
+    
+    .cv-icon {
+      font-size: 3em;
+      color: var(--primary);
+      margin-bottom: 20px;
+    }
+    
+    .cv-btn {
+      display: inline-block;
+      padding: 12px 25px;
+      background: var(--gradient);
+      color: white;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      margin-top: 20px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .cv-btn:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+    
+    /* Contact */
+    .contact-container {
+      display: flex;
+      justify-content: center;
+      gap: 50px;
+      flex-wrap: wrap;
+    }
+    
+    .contact-info {
+      flex: 1;
+      min-width: 300px;
+    }
+    
+    .contact-method {
+      display: flex;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+    
+    .contact-icon {
+      width: 50px;
+      height: 50px;
+      background: var(--gradient);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 20px;
+      color: white;
+      font-size: 1.2em;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .contact-text h3 {
+      font-family: 'Montserrat', sans-serif;
+      color: var(--primary);
+      margin-bottom: 5px;
+    }
+    
+    .contact-text a {
+      color: #333;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    .contact-text a:hover {
+      color: var(--accent);
+    }
+    
+    .tryhackme-badge {
+      flex: 1;
+      min-width: 300px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .badge-container {
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .badge-container::before {
+      content: "";
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      width: 100px;
+      height: 100px;
+      background: var(--primary);
+      opacity: 0.1;
+      border-radius: 50%;
+    }
+    
+    .badge-title {
+      margin-bottom: 15px;
+      text-align: center;
+      color: var(--primary);
+      font-family: 'Montserrat', sans-serif;
+    }
+    
+    /* Footer */
+    footer {
+      background: var(--dark);
+      color: white;
+      padding: 30px 0;
+      text-align: center;
+    }
+    
+    .footer-links {
+      margin-top: 20px;
+    }
+    
+    .social-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: var(--primary);
+      border-radius: 50%;
+      margin: 0 10px;
+      color: white;
+      font-size: 1.2em;
+      transition: all 0.3s ease;
+    }
+    
+    .social-icon:hover {
+      background: var(--accent);
+      transform: translateY(-5px);
+    }
+    
+    footer a {
+      color: white;
+      text-decoration: none;
+    }
+    
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes fadeInRight {
+      from {
+        opacity: 0;
+        transform: translateX(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    
+    /* Responsive */
+    @media (max-width: 992px) {
+      .header-content {
+        flex-direction: column-reverse;
+        text-align: center;
+        padding: 20px 0;
+      }
+      
+      .header-text, .header-image {
+        flex: 1;
+        width: 100%;
+        padding: 20px;
+      }
+      
+      h1 {
+        font-size: 2.5em;
+      }
+      
+      h1::after {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      
+      header {
+        height: auto;
+        min-height: 100vh;
+        padding: 100px 0 50px;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .nav-container {
+        flex-direction: column;
+      }
+      
+      .nav-link {
+        margin: 10px 0;
+      }
+      
+      .cv-container {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .cv-card {
+        width: 80%;
+        max-width: 300px;
+      }
+    }
+  </style>
 </head>
 <body>
-  <!-- Theme Toggler -->
-  <div class="theme-toggle">
-    <button id="theme-toggle-btn" aria-label="Toggle dark mode">
-      <i class="fas fa-moon"></i>
-    </button>
-  </div>
-
   <!-- Language Switcher -->
   <div class="language-switcher">
-    <button class="language-btn active" onclick="switchLanguage('en')" aria-label="Switch to English">EN</button>
-    <button class="language-btn" onclick="switchLanguage('fr')" aria-label="Switch to French">FR</button>
+    <button class="language-btn active" onclick="switchLanguage('en')">EN</button>
+    <button class="language-btn" onclick="switchLanguage('fr')">FR</button>
   </div>
 
   <!-- Header -->
@@ -40,94 +529,22 @@
     <div class="container header-content">
       <div class="header-text">
         <h1 id="name">Laurent Carlizzi</h1>
-        <p id="role">Cybersecurity Specialist</p>
-        <p id="intro">Driven by curiosity and a keen interest in evolving technologies, I bring a unique blend of analytical thinking and creative problem-solving to the table. My journey has led me to explore the dynamic world of cybersecurity, where I am constantly challenged and inspired by the ever-changing landscape.</p>
+        <p id="intro">Driven by curiosity and a keen interest in evolving technologies, I bring a unique blend of analytical thinking and creative problem-solving to the table. My journey has led me to explore the dynamic world of cybersecurity, where I am constantly challenged and inspired by the ever-changing landscape. With a background in communication, I excel at bridging technical concepts with real-world applications, helping others navigate the complexities of modern digital environments.</p>
       </div>
       <div class="header-image">
-        <img src="laurent.jpg" alt="Laurent Carlizzi" width="300" height="300" loading="lazy">
+        <img src="laurent.jpg" alt="Laurent Carlizzi">
       </div>
     </div>
   </header>
 
   <!-- Navigation -->
   <nav>
-    <div class="container">
-      <div class="nav-toggle" aria-label="Toggle navigation menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-      <div class="nav-container">
-        <a href="#skills" class="nav-link">Skills</a>
-        <a href="#certifications" class="nav-link">Certifications</a>
-        <a href="#projects" class="nav-link">Projects</a>
-        <a href="#cv" class="nav-link">CV</a>
-        <a href="#contact" class="nav-link">Contact</a>
-      </div>
+    <div class="nav-container">
+      <a href="#certifications" class="nav-link">Certifications</a>
+      <a href="#cv" class="nav-link">CV</a>
+      <a href="#contact" class="nav-link">Contact</a>
     </div>
   </nav>
-
-  <!-- Skills Section (New) -->
-  <section id="skills">
-    <div class="container">
-      <h2 class="section-title">Skills & Expertise</h2>
-      <div class="skills-container">
-        <div class="skill-category">
-          <h3>Cybersecurity</h3>
-          <div class="skills-grid">
-            <div class="skill-item">
-              <div class="skill-icon"><i class="fas fa-shield-alt"></i></div>
-              <div class="skill-name">Network Security</div>
-              <div class="skill-level">
-                <div class="progress" style="width: 85%;"></div>
-              </div>
-            </div>
-            <div class="skill-item">
-              <div class="skill-icon"><i class="fas fa-bug"></i></div>
-              <div class="skill-name">Vulnerability Assessment</div>
-              <div class="skill-level">
-                <div class="progress" style="width: 80%;"></div>
-              </div>
-            </div>
-            <div class="skill-item">
-              <div class="skill-icon"><i class="fas fa-lock"></i></div>
-              <div class="skill-name">Penetration Testing</div>
-              <div class="skill-level">
-                <div class="progress" style="width: 75%;"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <div class="skill-category">
-          <h3>Technical</h3>
-          <div class="skills-grid">
-            <div class="skill-item">
-              <div class="skill-icon"><i class="fas fa-code"></i></div>
-              <div class="skill-name">Python</div>
-              <div class="skill-level">
-                <div class="progress" style="width: 70%;"></div>
-              </div>
-            </div>
-            <div class="skill-item">
-              <div class="skill-icon"><i class="fas fa-terminal"></i></div>
-              <div class="skill-name">Bash Scripting</div>
-              <div class="skill-level">
-                <div class="progress" style="width: 65%;"></div>
-              </div>
-            </div>
-            <div class="skill-item">
-              <div class="skill-icon"><i class="fas fa-network-wired"></i></div>
-              <div class="skill-name">Network Analysis</div>
-              <div class="skill-level">
-                <div class="progress" style="width: 80%;"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- Certifications Section -->
   <section id="certifications">
@@ -136,103 +553,41 @@
       <div class="certifications-container">
         <div class="certification-card">
           <div class="certification-image">
-            <img src="certification/placeholder_certification1.png" alt="Microsoft Office 2019 Associate Certification" width="300" height="200" loading="lazy">
+            <img src="certification/placeholder_certification1.png" alt="Certification 1">
           </div>
           <div class="certification-content">
-            <h3>Microsoft Office 2019</h3>
+            <h3>Certification 1</h3>
             <p>Microsoft Office 2019 Associate Certification</p>
-            <div class="certification-meta">
-              <span class="certification-date">Obtained: April 2023</span>
-              <a href="#verification-link" class="certification-verify">Verify</a>
-            </div>
           </div>
         </div>
         
         <div class="certification-card">
           <div class="certification-image">
-            <img src="certification/placeholder_certification2.png" alt="Microsoft PowerPoint Associate Certification" width="300" height="200" loading="lazy">
+            <img src="certification/placeholder_certification2.png" alt="Certification 2">
           </div>
           <div class="certification-content">
-            <h3>Microsoft PowerPoint</h3>
-            <p>Microsoft PowerPoint Associate Certification</p>
-            <div class="certification-meta">
-              <span class="certification-date">Obtained: June 2023</span>
-              <a href="#verification-link" class="certification-verify">Verify</a>
-            </div>
+            <h3>Certification 2</h3>
+            <p>Microsoft Powerpoint Asscoiate Certification</p>
           </div>
         </div>
         
         <div class="certification-card">
           <div class="certification-image">
-            <img src="certification/placeholder_certification3.png" alt="Microsoft Word Expert Certification" width="300" height="200" loading="lazy">
+            <img src="certification/placeholder_certification3.png" alt="Certification 3">
           </div>
           <div class="certification-content">
-            <h3>Microsoft Word Expert</h3>
+            <h3>Certification 3</h3>
             <p>Microsoft Word Expert Certification</p>
-            <div class="certification-meta">
-              <span class="certification-date">Obtained: August 2023</span>
-              <a href="#verification-link" class="certification-verify">Verify</a>
-            </div>
           </div>
         </div>
         
         <div class="certification-card">
           <div class="certification-image">
-            <img src="certification/placeholder_certification4.png" alt="Young Enterprise Project Certification" width="300" height="200" loading="lazy">
+            <img src="certification/placeholder_certification4.png" alt="Certification 4">
           </div>
           <div class="certification-content">
-            <h3>Young Enterprise Project</h3>
+            <h3>Certification 4</h3>
             <p>Young Enterprise Project Certification</p>
-            <div class="certification-meta">
-              <span class="certification-date">Obtained: November 2022</span>
-              <a href="#verification-link" class="certification-verify">Verify</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Projects Section (New) -->
-  <section id="projects">
-    <div class="container">
-      <h2 class="section-title">Featured Projects</h2>
-      <div class="projects-container">
-        <div class="project-card">
-          <div class="project-image">
-            <img src="projects/placeholder_project1.png" alt="Network Security Analysis Tool" width="400" height="250" loading="lazy">
-          </div>
-          <div class="project-content">
-            <h3>Network Security Analysis Tool</h3>
-            <p>A Python-based tool for analyzing network traffic and identifying potential security threats. Uses machine learning algorithms to detect anomalies and potential intrusions.</p>
-            <div class="project-tech">
-              <span>Python</span>
-              <span>TensorFlow</span>
-              <span>Network Analysis</span>
-            </div>
-            <div class="project-links">
-              <a href="#github-link" class="project-link"><i class="fab fa-github"></i> View Code</a>
-              <a href="#demo-link" class="project-link"><i class="fas fa-external-link-alt"></i> Live Demo</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="project-card">
-          <div class="project-image">
-            <img src="projects/placeholder_project2.png" alt="Security Awareness Training Module" width="400" height="250" loading="lazy">
-          </div>
-          <div class="project-content">
-            <h3>Security Awareness Training Module</h3>
-            <p>An interactive training module designed to educate users about common cybersecurity threats and best practices for maintaining security in organizational environments.</p>
-            <div class="project-tech">
-              <span>HTML/CSS</span>
-              <span>JavaScript</span>
-              <span>Educational Design</span>
-            </div>
-            <div class="project-links">
-              <a href="#github-link" class="project-link"><i class="fab fa-github"></i> View Code</a>
-              <a href="#demo-link" class="project-link"><i class="fas fa-external-link-alt"></i> Live Demo</a>
-            </div>
           </div>
         </div>
       </div>
@@ -250,7 +605,7 @@
           </div>
           <h3>English Version</h3>
           <p>Download my professional resume in English</p>
-          <a href="cv/cv_en.pdf" target="_blank" class="cv-btn" aria-label="Download English CV">Download CV</a>
+          <a href="cv/cv_en.pdf" target="_blank" class="cv-btn">Download CV</a>
         </div>
         
         <div class="cv-card">
@@ -259,7 +614,7 @@
           </div>
           <h3>Version Française</h3>
           <p>Téléchargez mon CV professionnel en français</p>
-          <a href="cv/cv_fr.pdf" target="_blank" class="cv-btn" aria-label="Download French CV">Télécharger CV</a>
+          <a href="cv/cv_fr.pdf" target="_blank" class="cv-btn">Télécharger CV</a>
         </div>
       </div>
     </div>
@@ -287,7 +642,7 @@
             </div>
             <div class="contact-text">
               <h3>LinkedIn</h3>
-              <a href="https://www.linkedin.com/in/laurent-c-88392a186/" target="_blank" rel="noopener">linkedin.com/in/laurent-c-88392a186</a>
+              <a href="https://www.linkedin.com/in/laurent-c-88392a186/" target="_blank">linkedin.com/in/laurent-c-88392a186</a>
             </div>
           </div>
           
@@ -297,7 +652,7 @@
             </div>
             <div class="contact-text">
               <h3>GitHub</h3>
-              <a href="https://github.com/ltinhobwhat" target="_blank" rel="noopener">github.com/ltinhobwhat</a>
+              <a href="https://github.com/ltinhobwhat" target="_blank">github.com/ltinhobwhat</a>
             </div>
           </div>
         </div>
@@ -305,7 +660,7 @@
         <div class="tryhackme-badge">
           <div class="badge-container">
             <h3 class="badge-title">TryHackMe Profile</h3>
-            <iframe src="https://tryhackme.com/api/v2/badges/public-profile?userPublicId=3853988" style="border:none; width:100%; height:180px;" title="TryHackMe Profile Badge"></iframe>
+            <iframe src="https://tryhackme.com/api/v2/badges/public-profile?userPublicId=3853988" style="border:none; width:100%; height:180px;"></iframe>
           </div>
         </div>
       </div>
@@ -317,13 +672,13 @@
     <div class="container">
       <p>&copy; 2025 Laurent Carlizzi. All rights reserved.</p>
       <div class="footer-links">
-        <a href="mailto:laurentcarlizzi@gmail.com" class="social-icon" aria-label="Email Laurent">
+        <a href="mailto:laurentcarlizzi@gmail.com" class="social-icon">
           <i class="fas fa-envelope"></i>
         </a>
-        <a href="https://www.linkedin.com/in/laurent-c-88392a186/" target="_blank" rel="noopener" class="social-icon" aria-label="LinkedIn Profile">
+        <a href="https://www.linkedin.com/in/laurent-c-88392a186/" target="_blank" class="social-icon">
           <i class="fab fa-linkedin-in"></i>
         </a>
-        <a href="https://github.com/ltinhobwhat" target="_blank" rel="noopener" class="social-icon" aria-label="GitHub Profile">
+        <a href="https://github.com/ltinhobwhat" target="_blank" class="social-icon">
           <i class="fab fa-github"></i>
         </a>
       </div>
@@ -331,26 +686,20 @@
   </footer>
 
   <script>
-    // Language switching with localStorage support
+    // Function to switch language
     const translations = {
       en: {
         name: "Laurent Carlizzi",
-        role: "Cybersecurity Specialist",
-        intro: "Driven by curiosity and a keen interest in evolving technologies, I bring a unique blend of analytical thinking and creative problem-solving to the table. My journey has led me to explore the dynamic world of cybersecurity, where I am constantly challenged and inspired by the ever-changing landscape."
-        // Add translations for all other text elements
+        intro: "Driven by curiosity and a keen interest in evolving technologies, I bring a unique blend of analytical thinking and creative problem-solving to the table. My journey has led me to explore the dynamic world of cybersecurity, where I am constantly challenged and inspired by the ever-changing landscape. With a background in communication, I excel at bridging technical concepts with real-world applications, helping others navigate the complexities of modern digital environments."
       },
       fr: {
         name: "Laurent Carlizzi",
-        role: "Spécialiste en Cybersécurité",
-        intro: "Animé par la curiosité et un vif intérêt pour les technologies en constante évolution, j'apporte un mélange unique de pensée analytique et de résolution créative de problèmes. Mon parcours m'a conduit à explorer le monde dynamique de la cybersécurité, où je suis constamment mis au défi et inspiré par un paysage en perpétuelle mutation."
-        // Add translations for all other text elements
+        intro: "Animé par la curiosité et un vif intérêt pour les technologies en constante évolution, j'apporte un mélange unique de pensée analytique et de résolution créative de problèmes. Mon parcours m'a conduit à explorer le monde dynamique de la cybersécurité, où je suis constamment mis au défi et inspiré par un paysage en perpétuelle mutation. Avec un bagage en communication, j'excelle dans l'art de relier les concepts techniques aux applications du monde réel, aidant ainsi les autres à naviguer dans les complexités des environnements numériques modernes."
       }
     };
 
     function switchLanguage(language) {
-      // Update all translatable elements
       document.getElementById("name").textContent = translations[language].name;
-      document.getElementById("role").textContent = translations[language].role;
       document.getElementById("intro").textContent = translations[language].intro;
       
       // Update active button
@@ -358,41 +707,7 @@
         btn.classList.remove('active');
       });
       document.querySelector(`.language-btn[onclick="switchLanguage('${language}')"]`).classList.add('active');
-      
-      // Save preference
-      localStorage.setItem("language", language);
     }
-    
-    // Load saved language preference
-    const savedLanguage = localStorage.getItem("language");
-    if (savedLanguage) {
-      switchLanguage(savedLanguage);
-    }
-    
-    // Dark mode toggle
-    document.getElementById("theme-toggle-btn").addEventListener("click", function() {
-      document.documentElement.classList.toggle("dark-mode");
-      
-      // Save preference
-      if (document.documentElement.classList.contains("dark-mode")) {
-        localStorage.setItem("theme", "dark");
-        this.querySelector("i").classList.replace("fa-moon", "fa-sun");
-      } else {
-        localStorage.setItem("theme", "light");
-        this.querySelector("i").classList.replace("fa-sun", "fa-moon");
-      }
-    });
-    
-    // Initialize icon based on current theme
-    if (document.documentElement.classList.contains("dark-mode")) {
-      document.getElementById("theme-toggle-btn").querySelector("i").classList.replace("fa-moon", "fa-sun");
-    }
-    
-    // Mobile navigation toggle
-    document.querySelector(".nav-toggle").addEventListener("click", function() {
-      this.classList.toggle("active");
-      document.querySelector(".nav-container").classList.toggle("active");
-    });
     
     // Smooth scrolling for navigation links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -402,10 +717,6 @@
         document.querySelector(this.getAttribute('href')).scrollIntoView({
           behavior: 'smooth'
         });
-        
-        // Close mobile menu if open
-        document.querySelector(".nav-toggle").classList.remove("active");
-        document.querySelector(".nav-container").classList.remove("active");
       });
     });
   </script>
