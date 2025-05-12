@@ -28,6 +28,7 @@
       color: #333;
       line-height: 1.6;
       overflow-x: hidden;
+      scroll-behavior: smooth;
     }
     
     .container {
@@ -156,6 +157,7 @@
       top: 0;
       z-index: 1000;
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
     }
     
     .nav-container {
@@ -193,6 +195,42 @@
     
     .nav-link:hover::after {
       width: 100%;
+    }
+    
+    .nav-shrink {
+      padding: 10px 0;
+    }
+    
+    /* Back to Top Button */
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: var(--gradient);
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2em;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      opacity: 0;
+      visibility: hidden;
+      z-index: 999;
+    }
+    
+    .back-to-top.show {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .back-to-top:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
     }
     
     /* Sections */
@@ -279,6 +317,7 @@
       display: flex;
       justify-content: center;
       gap: 30px;
+      flex-wrap: wrap;
     }
     
     .cv-card {
@@ -407,6 +446,85 @@
       font-family: 'Montserrat', sans-serif;
     }
     
+    /* Loading Animation */
+    .loader-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--dark);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+    
+    .loader {
+      width: 60px;
+      height: 60px;
+      border: 5px solid rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      border-top-color: var(--secondary);
+      animation: spin 1s ease-in-out infinite;
+    }
+    
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+    
+    .loader-container.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+    
+    /* Dark Mode */
+    .dark-mode-toggle {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 100;
+      width: 40px;
+      height: 40px;
+      background: var(--dark);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+    
+    .dark-mode-toggle:hover {
+      transform: rotate(30deg);
+    }
+    
+    body.dark-mode {
+      background-color: var(--dark);
+      color: white;
+    }
+    
+    body.dark-mode section:nth-child(odd) {
+      background-color: #2e2e3e;
+    }
+    
+    body.dark-mode .certification-card,
+    body.dark-mode .cv-card,
+    body.dark-mode .badge-container {
+      background: #2a2a3a;
+      color: white;
+    }
+    
+    body.dark-mode .contact-text a,
+    body.dark-mode .section-title {
+      color: white;
+    }
+    
     /* Footer */
     footer {
       background: var(--dark);
@@ -505,6 +623,10 @@
         margin: 10px 0;
       }
       
+      .certifications-container {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      }
+      
       .cv-container {
         flex-direction: column;
         align-items: center;
@@ -513,11 +635,27 @@
       .cv-card {
         width: 80%;
         max-width: 300px;
+        margin-bottom: 20px;
       }
     }
   </style>
 </head>
 <body>
+  <!-- Loading Animation -->
+  <div class="loader-container">
+    <div class="loader"></div>
+  </div>
+
+  <!-- Dark Mode Toggle -->
+  <div class="dark-mode-toggle">
+    <i class="fas fa-moon"></i>
+  </div>
+
+  <!-- Back to Top Button -->
+  <div class="back-to-top">
+    <i class="fas fa-arrow-up"></i>
+  </div>
+
   <!-- Language Switcher -->
   <div class="language-switcher">
     <button class="language-btn active" onclick="switchLanguage('en')">EN</button>
@@ -538,7 +676,7 @@
   </header>
 
   <!-- Navigation -->
-  <nav>
+  <nav id="main-nav">
     <div class="nav-container">
       <a href="#certifications" class="nav-link">Certifications</a>
       <a href="#cv" class="nav-link">CV</a>
@@ -553,7 +691,7 @@
       <div class="certifications-container">
         <div class="certification-card">
           <div class="certification-image">
-            <img src="certification/placeholder_certification1.png" alt="Certification 1">
+            <img src="certification/placeholder_certification_1.png" alt="Certification 1">
           </div>
           <div class="certification-content">
             <h3>Certification 1</h3>
@@ -563,17 +701,17 @@
         
         <div class="certification-card">
           <div class="certification-image">
-            <img src="certification/placeholder_certification2.png" alt="Certification 2">
+            <img src="certification/placeholder_certification_2.png" alt="Certification 2">
           </div>
           <div class="certification-content">
             <h3>Certification 2</h3>
-            <p>Microsoft Powerpoint Asscoiate Certification</p>
+            <p>Microsoft Powerpoint Associate Certification</p>
           </div>
         </div>
         
         <div class="certification-card">
           <div class="certification-image">
-            <img src="certification/placeholder_certification3.png" alt="Certification 3">
+            <img src="certification/placeholder_certification_3.png" alt="Certification 3">
           </div>
           <div class="certification-content">
             <h3>Certification 3</h3>
@@ -583,11 +721,21 @@
         
         <div class="certification-card">
           <div class="certification-image">
-            <img src="certification/placeholder_certification4.png" alt="Certification 4">
+            <img src="certification/placeholder_certification_4.png" alt="Certification 4">
           </div>
           <div class="certification-content">
             <h3>Certification 4</h3>
             <p>Young Enterprise Project Certification</p>
+          </div>
+        </div>
+        
+        <div class="certification-card">
+          <div class="certification-image">
+            <img src="certification/placeholder_certification_5.png" alt="Certification 5">
+          </div>
+          <div class="certification-content">
+            <h3>Certification 5</h3>
+            <p>CompTIA Security+ Certification</p>
           </div>
         </div>
       </div>
@@ -686,6 +834,13 @@
   </footer>
 
   <script>
+    // Page loader
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        document.querySelector('.loader-container').classList.add('hidden');
+      }, 500);
+    });
+    
     // Function to switch language
     const translations = {
       en: {
@@ -719,6 +874,35 @@
         });
       });
     });
-  </script>
-</body>
-</html>
+    
+    // Shrink navigation on scroll
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 100) {
+        document.getElementById('main-nav').classList.add('nav-shrink');
+      } else {
+        document.getElementById('main-nav').classList.remove('nav-shrink');
+      }
+      
+      // Back to top button visibility
+      if (window.scrollY > 300) {
+        document.querySelector('.back-to-top').classList.add('show');
+      } else {
+        document.querySelector('.back-to-top').classList.remove('show');
+      }
+    });
+    
+    // Back to top functionality
+    document.querySelector('.back-to-top').addEventListener('click', function() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+    
+    // Dark mode toggle
+    document.querySelector('.dark-mode-toggle').addEventListener('click', function() {
+      document.body.classList.toggle('dark-mode');
+      
+      const icon = this.querySelector('i');
+      if (icon.classList.contains('fa-moon')) {
+        icon.classList.remove('fa-moon
